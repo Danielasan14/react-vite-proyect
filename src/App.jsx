@@ -11,18 +11,24 @@ const mock_perro = {
   raza: 'french poodle'
 }
 
-const cardData = {
+const CARD_DATA_MOCK = {
   name: 'Hécate',
   level: 10,
   roll: 'mago',
   online: true,
   starts: 3,
   photo: maga,
-  power: 'Telequinesis',
   strong: 10,
-  live: 100,
+  life: 100,
 }
-
+const CARD_DATA_MOCK_ENEMIGO = {
+  nameE: 'Berlin',
+  rollE: 'mago',
+  onlineE: false,
+  startsE: 5,
+  strongE: 12,
+  lifeE: 98,
+}
 function PerroComponent(props) {
   return (
     <>
@@ -37,21 +43,41 @@ function PerroComponent(props) {
 }
 
 function Card(props) {
+  const {
+    nameE,
+    rollE,
+    onlineE,
+    startsE,
+    strongE,
+    lifeE
+  }= props.enemigoCardData
+  const {
+    photo,
+    name,
+    roll,
+    online,
+    starts,
+    strong,
+    life,
+    power
+  } = props.cardData
+
   return (
-    <>
-      <div className="container">
-        <img className='foto' src={props.cardData.photo}></img>
-        <h1 className='personajeName'>{props.cardData.name}</h1>
-        <p className='estado'>{props.cardData.roll} . {props.cardData.online ? 'Activo' : 'Inactivo'}</p>
-        <h2 className='estrellas'>STARS: {props.cardData.starts}</h2>
-        <h3> 💪🏻Fuerza {props.cardData.strong}</h3>
-        <h3>❤️Vida {props.cardData.live}</h3>
-        <h2>Habilidades {props.cardData.power}</h2>
-        <button className='botonDeAtaque' onClick={() => {
-          alert('Atacando')
-        }}> ⚔️ Atacar</button>
-      </div>
-    </>
+
+    <div className="container">
+      <img className='foto' src={photo}></img>
+      <h1 className='personajeName'>{name}</h1>
+      <p className='estado'>{roll} . {online ? 'Activo' : 'Inactivo'}</p>
+      <h2 className='estrellas'>STARS: {starts}</h2>
+      <h3> 💪🏻Fuerza {strong}</h3>
+      <h3>❤️Vida {life}</h3>
+      <h2>Habilidades {power}</h2>
+      <button className='botonDeAtaque' onClick={() => {
+        alert('Atacando')
+      }}> ⚔️ Atacar</button>
+      <p>ENEMIGO: Nombre: {nameE} su roll es {rollE} esta {onlineE} tiene {startsE} estrellas, su fuerza es de {strongE}% </p>
+    </div>
+
   )
 }
 
@@ -86,9 +112,17 @@ function App() {
         Click on the Vite and React logos to learn more
       </p>
       <PerroComponent perro={mock_perro} activo={true} precio={50} />
-      <Card cardData={cardData} />
+      <Card cardData={CARD_DATA_MOCK} enemigoCardData={CARD_DATA_MOCK_ENEMIGO} />
     </>
   )
 }
+
+
+const colors = ['red', 'blue', 'green', 'yellow', 'pink', 'purple']
+const [firstColor, secondColor, thirdColor, ...restOfColors] = colors
+console.log(firstColor) // 'red'
+console.log(secondColor) // 'blue'
+console.log(thirdColor) // 'green'
+console.log(restOfColors) // ['yellow', 'pink', 'purple']
 
 export default App
